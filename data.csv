@@ -1,0 +1,128 @@
+MATH
+If $\int_0^1 \frac{\ln(1+x)}{x} dx = \frac{\pi^2}{12}$\, then $\int_0^1 \frac{\ln(1-x)}{x} dx$ equals:,$-\frac{\pi^2}{6}$,$-\frac{\pi^2}{12}$,$\frac{\pi^2}{6}$,$-\frac{\pi^2}{3}$,-\frac{\pi^2}{6}
+The number of real solutions to $x^x = \left(\frac{x}{2}\right)^{x/2}$ for $x > 0$ is:,0,1,2,3,2
+If $z = \cos\theta + i\sin\theta$\, then $\frac{z^2 - 1}{z^2 + 1}$ simplifies to:,$i\tan\theta$,$i\sin\theta$,$i\cot\theta$,$\tan\theta$,i\tan\theta
+The sum of the series $\sum_{n=1}^{\infty} \frac{n^2}{2^n}$ equals:,4,6,8,10,6
+If $f(x) = \lim_{n\to\infty} \frac{x^{2n}-1}{x^{2n}+1}$\, then $f$ is:,continuous everywhere,discontinuous at $x=\pm 1$,discontinuous at $x=0$,continuous only for $|x|<1$,discontinuous at $x=\pm 1$
+The number of 4-digit numbers with distinct digits whose digit sum is 27 is:,12,16,18,20,16
+Let $A$ be a $3\times3$ matrix with $\det(A) = 5$. Then $\det(2\text{adj}(A))$ equals:,$200$,$400$,$1000$,$2000$,400
+If $\sin^{-1}x + \sin^{-1}y + \sin^{-1}z = \pi$\, then $x^2 + y^2 + z^2 + 2xyz$ equals:,0,1,2,$\pi$,1
+The area enclosed by the curve $r = 2\cos\theta - 1$ in polar coordinates is:,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$,\frac{\pi}{2}
+If $\alpha$ and $\beta$ are roots of $x^2 - x + 1 = 0$\, then $\alpha^{2026} + \beta^{2026}$ equals:,$-1$,$0$,$1$,$2$,-1
+The minimum value of $|z - 3 - 4i| + |z + 2 - i|$ over all complex $z$ is:,$5$,$\sqrt{50}$,$\sqrt{26}$,$\sqrt{34}$,\sqrt{50}
+A fair die is rolled until a 6 appears. The probability that an even number of rolls are needed is:,$\frac{1}{6}$,$\frac{5}{11}$,$\frac{6}{11}$,$\frac{5}{36}$,\frac{5}{11}
+If $f(x) = x^3 - 3x$ and $g$ is its inverse\, then $g'(10)$ equals:,$\frac{1}{9}$,$\frac{1}{12}$,$\frac{1}{24}$,$\frac{1}{75}$,\frac{1}{75}
+The number of ways to arrange 3 red\, 3 blue\, and 3 green balls in a row such that no two adjacent balls have the same color is:,0,12,18,36,12
+$\lim_{x\to 0} \frac{(1+x)^{1/x} - e}{x}$ equals:,$-\frac{e}{2}$,$\frac{e}{2}$,$-e$,$e$,-\frac{e}{2}
+The number of integers between 1 and 1000 that are divisible by neither 4\, nor 6\, nor 10 is:,499,500,501,502,499
+If $I = \int_0^{\pi/2} \frac{dx}{1 + (\tan x)^{\sqrt{2}}}$\, then $I$ equals:,$\frac{\pi}{8}$,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{\pi}{6}$,\frac{\pi}{4}
+A parabola with vertex at the origin opens rightward and passes through $(4\,,2)$. The directrix is $x = $:,$-1$,$-2$,$-3$,$-4$,-1
+How many ordered triples $(a\,,b\,,c)$ of positive integers satisfy $a + b + c = 20$ and $a \leq b \leq c$?:,30,32,34,36,36
+The coefficient of $x^{10}$ in $(1 + x + x^2)^{10}$ is:,3^{10},\binom{20}{10} - 10\binom{18}{8},8901,7869,8901
+If $\log_a b = \log_b c = \log_c a = k$\, then $k$ equals:,1,-1,$\pm 1$,$\pm\frac{1}{\sqrt{3}}$,\pm 1
+The solution set of $\left\lfloor x^2 - x - 2\right\rfloor = 0$ is:,$(1\,,2)$,$[1\,,2]$,$(1\,,2]$,$[1\,,2)$,(1\,,2]
+If the equation $x^4 - 4x^3 + ax^2 + bx + 1 = 0$ has 4 positive roots\, then $a + b$ equals:,2,-2,4,-4,-2
+$\int \frac{dx}{x^4 + x^2 + 1}$ can be expressed as a sum of arctan functions. The integral of $\frac{1}{x^4+x^2+1}$ equals:,$\frac{1}{2}\arctan(x - \frac{1}{x}) + C$,$\frac{\sqrt{3}}{4}\arctan\frac{2x+1}{\sqrt{3}} - \frac{\sqrt{3}}{4}\arctan\frac{2x-1}{\sqrt{3}} + C$,$\frac{1}{4}\ln|x^2+x+1| - \frac{1}{4}\ln|x^2-x+1| + C$,All of the above,All of the above
+The rank of the matrix $\begin{pmatrix}1 & 2 & 3\\4 & 5 & 6\\7 & 8 & 9\end{pmatrix}$ is:,1,2,3,0,2
+If $y = \sqrt{x + \sqrt{x + \sqrt{x + \cdots}}}$\, then $\frac{dy}{dx}$ equals:,$\frac{1}{2y-1}$,$\frac{1}{y}$,$\frac{y}{2x}$,$2y - 1$,\frac{1}{2y-1}
+The number of solutions to $[\sin x] + [\cos x] = 0$ in $[0\,,2\pi]$\, where $[\cdot]$ is the floor function\, is: (count as measure of interval length),$\pi$,$2\pi - 2$,$\frac{3\pi}{2}$,$\pi + 1$,\frac{3\pi}{2}
+If $P(x) = x^4 + x^3 + x^2 + x + 1$ divides $x^{44} + x^{33} + x^{22} + x^{11} + 1$\, the quotient's degree is:,40,39,38,41,40
+The number of points of non-differentiability of $f(x) = ||\,|x|-1|-1|$ is:,3,4,5,6,5
+Two circles each of radius 5 have their centres at $(0\,,0)$ and $(6\,,8)$. The length of the common external tangent is:,8,6,12,$\sqrt{132}$,\sqrt{132}
+The value of $\tan\left(\sum_{k=1}^{10}\arctan\frac{1}{k^2+k+1}\right)$ equals:,$\frac{10}{11}$,$\frac{10}{12}$,$\frac{11}{12}$,$\frac{9}{10}$,\frac{10}{11}
+PHYSICS
+A particle moves in the $xy$-plane such that $x = A\cos\omega t$ and $y = B\sin\omega t$. The magnitude of acceleration is:,$\omega^2\sqrt{x^2+y^2}$,$\omega\sqrt{x^2+y^2}$,$\omega^2(A^2+B^2)$,$\omega^2\sqrt{A^2+B^2}$,\omega^2\sqrt{x^2+y^2}
+A thin uniform disk of mass $M$ and radius $R$ has a circular hole of radius $R/2$ centered at $(R/2\,,0)$. The moment of inertia about the central axis is:,$\frac{11MR^2}{24}$,$\frac{13MR^2}{24}$,$\frac{7MR^2}{12}$,$\frac{3MR^2}{8}$,\frac{13MR^2}{24}
+A photon of wavelength $\lambda$ strikes a free electron at rest and is scattered at $90°$ to its original direction. The wavelength of the scattered photon is:,$\lambda + \frac{h}{m_e c}$,$\lambda + \frac{2h}{m_e c}$,$\lambda\sqrt{2}$,$\lambda + \frac{h}{m_e c\sqrt{2}}$,\lambda + \frac{h}{m_e c}
+In a double-star system\, two stars of equal mass $M$ orbit their common centre of mass at radius $R$. The period of the orbit is:,$2\pi\sqrt{\frac{R^3}{GM}}$,$2\pi\sqrt{\frac{2R^3}{GM}}$,$\pi\sqrt{\frac{4R^3}{GM}}$,$2\pi\sqrt{\frac{4R^3}{GM}}$,2\pi\sqrt{\frac{4R^3}{GM}}
+A Carnot engine operates between $500\,K$ and $300\,K$ and produces $2\,kJ$ of work per cycle. How much heat is rejected per cycle?,3 kJ,5 kJ,2 kJ,1.2 kJ,3 kJ
+A current-carrying square loop of side $a$ is placed in a uniform magnetic field $B$ with its plane parallel to $B$. The torque on the loop if current is $I$ is:,$BIa^2$,$\frac{BIa^2}{2}$,$2BIa^2$,0,$BIa^2$
+An $LC$ circuit has $L = 1\,mH$ and $C = 1\,\mu F$. If the initial charge on capacitor is $Q_0$\, the maximum current is:,$Q_0\sqrt{\frac{L}{C}}$,$Q_0\sqrt{\frac{C}{L}}$,$\frac{Q_0}{\sqrt{LC}}$,$Q_0\sqrt{LC}$,Q_0\sqrt{\frac{C}{L}}
+A rod of length $L$ and linear charge density $\lambda$ lies along the $x$-axis from $0$ to $L$. The electric potential at the point $(L\,,0)$ (the far end) is:,$\frac{\lambda}{4\pi\varepsilon_0}\ln 2$,$\frac{\lambda L}{4\pi\varepsilon_0}$,$\frac{\lambda}{4\pi\varepsilon_0}$,$\frac{2\lambda}{4\pi\varepsilon_0}$,\frac{\lambda}{4\pi\varepsilon_0}\ln 2
+Two identical capacitors $C$ each are connected first in series (charged to $V$)\, then reconnected in parallel. The ratio of final to initial energy is:,$\frac{1}{2}$,$\frac{1}{4}$,$2$,$1$,\frac{1}{2}
+A wave $y = 0.1\sin(2\pi t - 2\pi x)$ meets $y = 0.1\sin(2\pi t + 2\pi x)$. The distance between adjacent nodes is:,$0.25\,m$,$0.5\,m$,$1\,m$,$0.1\,m$,0.5\,m
+A charged particle enters a magnetic field perpendicular to it. If the particle's speed is doubled and charge halved\, the new radius of circular motion is:, same,doubled,quadrupled,halved,doubled
+An object is placed at the centre of curvature of a concave mirror. If the object moves towards the pole with speed $v$\, the image moves:,towards the mirror with speed $v$,away from mirror with speed $>v$,towards mirror with speed $<v$,remains stationary,away from mirror with speed >v
+A gas undergoes adiabatic compression. If the ratio of initial to final volume is $8:1$ and $\gamma = 5/3$\, the ratio of final to initial temperature is:,$4:1$,$8:1$,$16:1$,$2:1$,4:1
+In Young's double slit experiment with wavelength $\lambda$\, the slits are separated by $d$ and screen is at $D$. If one slit is covered by a glass of thickness $t$ and refractive index $n$\, the central bright fringe shifts by:,$\frac{(n-1)tD}{d}$,$\frac{ntD}{d}$,$\frac{(n+1)tD}{d}$,$\frac{(n-1)D}{td}$,\frac{(n-1)tD}{d}
+The binding energy per nucleon peaks at which nucleus?,$^{56}$Fe,$^{12}$C,$^{238}$U,$^{4}$He,^{56}Fe
+A ball is thrown horizontally from a cliff of height $H$. Another ball is dropped from the same cliff at the same instant. Which reaches the bottom first?,the thrown ball,the dropped ball,both at the same time,depends on mass,both at the same time
+The de Broglie wavelength of an electron accelerated through potential $V$ (in volts) is approximately:,$\frac{1.23}{\sqrt{V}}$ nm,$\frac{12.3}{\sqrt{V}}$ Å,$\frac{1.23}{\sqrt{V}}$ Å,$\frac{0.123}{\sqrt{V}}$ nm,\frac{1.23}{\sqrt{V}} nm
+A dielectric slab is inserted into a capacitor connected to a battery. Which quantity stays constant?,Charge,Voltage,Energy,Electric field magnitude,Voltage
+In a series $RLC$ circuit at resonance\, the impedance equals:,$R$,$\sqrt{R^2 + (X_L - X_C)^2}$,$0$,$X_L + X_C$,R
+A rocket exhausts gas at $v_{ex} = 2000\,m/s$. To double its speed from $1000\,m/s$ to $2000\,m/s$\, the required mass ratio $m_i/m_f$ is:,$e$,$e^{0.5}$,$e^{2}$,$e^{1.5}$,e^{0.5}
+Three identical resistors are connected. Maximum resistance achievable is 3R. Second maximum is:,$\frac{3R}{2}$,$\frac{2R}{3}$,$\frac{R}{3}$,$\frac{4R}{3}$,\frac{3R}{2}
+The work done by a non-conservative force equals:,change in potential energy,change in kinetic energy,change in total mechanical energy,zero,change in total mechanical energy
+For total internal reflection\, the critical angle $\theta_c$ for glass-air interface with $n=1.5$ is:,$\sin^{-1}(0.67)$,$\cos^{-1}(0.67)$,$\tan^{-1}(1.5)$,$\sin^{-1}(1.5)$,\sin^{-1}(0.67)
+A uniform rod of length $L$ is pivoted at one end and held horizontal\, then released. Its angular velocity when vertical is:,$\sqrt{\frac{3g}{L}}$,$\sqrt{\frac{2g}{L}}$,$\sqrt{\frac{g}{L}}$,$\sqrt{\frac{6g}{L}}$,\sqrt{\frac{3g}{L}}
+A blackbody at $3000\,K$ emits maximum radiation at wavelength $\lambda_m$. If cooled to $1500\,K$\, its maximum emission wavelength becomes:,$\lambda_m/2$,$2\lambda_m$,$4\lambda_m$,$\lambda_m$,2\lambda_m
+The terminal velocity of a sphere of radius $r$ falling in a viscous liquid is proportional to:,$r$,$r^2$,$r^3$,$\sqrt{r}$,r^2
+A proton and an $\alpha$-particle are accelerated through the same potential. The ratio of their de Broglie wavelengths $\lambda_p / \lambda_\alpha$ is:,$\frac{1}{\sqrt{2}}$,$\frac{1}{2}$,$\sqrt{2}$,$2\sqrt{2}$,\sqrt{2}
+The electric field inside a uniformly charged spherical shell is:,zero,$\frac{kQ}{R^2}$,$\frac{kQ}{r^2}$,constant but nonzero,zero
+Two particles of masses $m_1$ and $m_2$ undergo perfectly inelastic collision. The kinetic energy lost is:,$\frac{1}{2}\frac{m_1 m_2}{m_1+m_2}(v_1-v_2)^2$,$\frac{1}{2}m_1 v_1^2 + \frac{1}{2}m_2 v_2^2$,$\frac{1}{2}(m_1+m_2)v_f^2$,$m_1 v_1 - m_2 v_2$,\frac{1}{2}\frac{m_1 m_2}{m_1+m_2}(v_1-v_2)^2
+A solenoid of length $\ell$\, radius $r$\, and $N$ turns carries current $I$. The energy stored is:,$\frac{\mu_0 N^2 I^2 \pi r^2}{2\ell}$,$\frac{\mu_0 N^2 I^2}{2\ell}$,$\frac{\mu_0 N^2 I^2 r^2}{2}$,$\mu_0 N^2 I^2 \pi r^2 \ell$,\frac{\mu_0 N^2 I^2 \pi r^2}{2\ell}
+The threshold frequency for a metal is $f_0$. Light of frequency $f > f_0$ ejects electrons with maximum KE. If intensity is doubled\, the stopping potential:,doubles,halves,stays the same,increases but not doubles,stays the same
+ENGLISH
+Choose the word that best completes the analogy: PALIMPSEST : MANUSCRIPT :: PENTIMENTO : ___,Sculpture,Painting,Symphony,Architecture,Painting
+The sentence "He was the last person I would have expected to arrive" contains what grammatical structure in "the last person I would have expected to arrive"?,A relative clause with an ellipted complementizer,A gerund phrase modifying 'person',A reduced adverbial clause,An absolute construction,A relative clause with an ellipted complementizer
+Choose the correctly punctuated sentence:,"The witness\, who\, the defense claimed\, had lied\, was recalled to the stand.","The witness who the defense claimed had lied was recalled to the stand.","The witness\, who the defense claimed had lied\, was recalled to the stand.","The witness who\, the defense claimed\, had lied was recalled to the stand.","The witness\, who the defense claimed had lied\, was recalled to the stand."
+Which sentence commits a squinting modifier error?,"Exercising regularly\, according to studies\, improves mood significantly.","Students who practice daily often improve dramatically.","The patient was told frequently to monitor his blood pressure.","Only those who finish first receive the prize.","The patient was told frequently to monitor his blood pressure."
+PERSPICACIOUS is most nearly opposite in meaning to:,Discerning,Obtuse,Sagacious,Penetrating,Obtuse
+Which choice uses the subjunctive mood correctly?,If I was you\, I would reconsider.,She acts as if she was the queen.,The committee demands that he resigns immediately.,It is essential that the report be submitted by Friday.,It is essential that the report be submitted by Friday.
+Identify the sentence with correct subject-verb agreement:,"Either the manager or her assistants is responsible.","Neither the students nor the teacher were prepared.","The number of errors in this document are alarming.","A pack of wolves was spotted near the village.","A pack of wolves was spotted near the village."
+Choose the antonym for SANGUINE:,Optimistic,Florid,Despondent,Ruddy,Despondent
+Which sentence does NOT contain a dangling modifier?,"Having eaten dinner\, the dishes were washed.","Walking to school\, it began to rain.","To excel in chess\, one must practice endlessly.","Exhausted from the climb\, a rest was needed.","To excel in chess\, one must practice endlessly."
+The rhetorical device in "The pen is mightier than the sword" is:,Personification,Metonymy,Synecdoche,Litotes,Metonymy
+The word TENDENTIOUS most nearly means:,Objective,Promoting a particular cause,Uncertain,Temporary,Promoting a particular cause
+Which sentence uses the colon correctly?,He had one goal\: to win.,The menu included\: pasta\, salad\, and bread.,She said\: "please be quiet".,He was born in\: Manchester.,He had one goal\: to win.
+LACONIC is to BREVITY as LOQUACIOUS is to:,Silence,Verbosity,Clarity,Wit,Verbosity
+The passage argues that technological determinism is flawed because it ignores human agency. This rhetorical strategy is best described as:,Appeal to authority,Reductio ad absurdum,Counter-argument and refutation,Circular reasoning,Counter-argument and refutation
+Which word is an OXYMORON when used alone as a compound?,Bittersweet,Daylight,Snowball,Rainstorm,Bittersweet
+Choose the sentence that is NOT ambiguous:,"Visiting relatives can be boring.","The professor told the student that he had failed.","The detective saw the thief with binoculars.","All students who missed the exam should report to the office.","All students who missed the exam should report to the office."
+ADUMBRATE most nearly means:,To clarify in detail,To sketch or outline vaguely,To celebrate loudly,To eliminate entirely,To sketch or outline vaguely
+Which is the correct form?,If he would have studied\, he would have passed.,Had he studied\, he would have passed.,Had he studied\, he would have been passed.,If he studied\, he would have passed.,Had he studied\, he would have passed.
+The figure of speech in "The streets swallowed the lonely wanderer" is:,Metaphor,Simile,Personification,Pathetic fallacy,Personification
+PERIPATETIC most nearly means:,Sedentary,Peripatetic,Itinerant,Domiciled,Itinerant
+Which sentence is in the passive voice with the agent expressed?,The novel was written.,The cake was eaten by the children.,They were seen leaving the building.,The window was broken.,The cake was eaten by the children.
+The word DEFENESTRATE literally means:,To overthrow a government,To throw someone out of a window,To remove furniture,To deny an allegation,To throw someone out of a window
+Choose the word that CANNOT be used as both a noun and a verb:,Sanction,Advocate,Refuse,Ubiquitous,Ubiquitous
+Which of the following is an example of ANAPHORA?,Do I dare disturb the universe?,Ask not what your country can do for you; ask what you can do for your country.,"We shall fight on the beaches\, we shall fight on the landing grounds\, we shall fight in the fields.","It was the best of times\, it was the worst of times.","We shall fight on the beaches\, we shall fight on the landing grounds\, we shall fight in the fields."
+The sentence "It is time the government took action" uses:,Simple present,Present perfect,Past subjunctive,Future conditional,Past subjunctive
+In indirect speech\, "She said\, 'I have never been here before'" becomes:,She said she had never been there before.,She said she has never been here before.,She said she never was there before.,She said she never has been there before.,She said she had never been there before.
+ENERVATE most nearly means:,To energize,To weaken,To enumerate,To disturb,To weaken
+Which literary term describes a narrative that begins in the middle of the action?,In medias res,Denouement,Anachronism,Prolepsis,In medias res
+The grammatical error in "Between you and I\, this is incorrect" is:,Wrong preposition,Wrong case for 'I' after preposition,Comma splice,Misplaced modifier,Wrong case for 'I' after preposition
+NEFARIOUS is most nearly opposite to:,Wicked,Virtuous,Criminal,Infamous,Virtuous
+AMELIORATE most nearly means:,To worsen,To improve,To evaluate,To eliminate,To improve
+COMPUTER
+In an AVL tree\, after inserting node 30 into the tree with root 20 (left child 10\, right child 25)\, what rotation(s) are needed?,No rotation,Left rotation at 25,Right-Left rotation at 20,Left rotation at 20,No rotation
+What does the following code output? `int x = 5; cout << x++ + ++x;`,12,11,13,10,12
+Given an undirected graph with $V$ vertices and $E$ edges\, what is the time complexity of Dijkstra's algorithm using a binary heap?,O(V log V),O(E log V),O(E + V log V),O(V^2),O(E + V log V)
+A process is in the 'Waiting' state. It can transition to which state next?,'Ready','Running','Terminated','New','Ready'
+Which of the following is a lossless-join\, dependency-preserving decomposition from 3NF?,Projecting onto individual attributes,BCNF decomposition,Synthesis algorithm decomposition,First Normal Form only,Synthesis algorithm decomposition
+What is the two's complement of $-37$ in 8-bit binary?,11011011,11011010,11011100,10100101,11011011
+In TCP/IP\, which layer is responsible for end-to-end error recovery and flow control?,Network,Transport,Data Link,Application,Transport
+The time complexity of the Knuth-Morris-Pratt (KMP) string matching algorithm for pattern $P$ in text $T$ is:,O(|T| * |P|),O(|T| + |P|),O(|T| log |P|),O(|P|^2),O(|T| + |P|)
+What does `SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHERE country = 'PK')` return?,All orders,Orders from Pakistani customers,Customer names from Pakistan,All customers,Orders from Pakistani customers
+Which data structure is used in BFS traversal of a graph?,Stack,Queue,Priority Queue,Deque,Queue
+Evaluate: `(0b1010 & 0b1100) | (0b0110 ^ 0b1010)`,14,12,10,8,14
+Which scheduling algorithm minimizes average waiting time given all jobs arrive simultaneously?,FCFS,Round Robin,SJF,Priority Scheduling,SJF
+In a $B$-tree of order $m$\, the maximum number of keys in a node is:,$m$,$m-1$,$m+1$,$2m-1$,m-1
+What is the output of this C code?\n`int a[] = {1\,2\,3\,4\,5}; int *p = a+2; printf("%d"\, *(p-1));`,1,2,3,4,2
+Which of the following is NOT a property of a relational database primary key?,Uniqueness,Non-null,Indexed,Can be composite,Indexed
+What does the acronym ACID stand for in database systems?,Atomicity\, Consistency\, Isolation\, Durability,Availability\, Consistency\, Integrity\, Data,Atomicity\, Concurrency\, Integrity\, Durability,Accuracy\, Consistency\, Isolation\, Data,Atomicity\, Consistency\, Isolation\, Durability
+In Python\, what does `[x**2 for x in range(5) if x%2==0]` produce?,[0\, 4\, 16],[0\, 1\, 4\, 9\, 16],[4\, 16],[0\, 4],[ 0\, 4\, 16]
+What is the output of `print(type(1/2))` in Python 3?,<class 'int'>,<class 'float'>,<class 'double'>,<class 'number'>,<class 'float'>
+Which of the following is TRUE about a hash table with chaining?,Worst-case lookup is O(1),Worst-case lookup is O(n),Average-case lookup is O(n),It cannot handle collisions,Worst-case lookup is O(n)
+What is the maximum number of nodes in a binary tree of height $h$ (root at height 0)?,2h,2^h - 1,2^(h+1) - 1,h^2,2^(h+1) - 1
+In IPv4\, the default subnet mask for a Class B network is:,255.0.0.0,255.255.0.0,255.255.255.0,255.255.255.255,255.255.0.0
+The NP-complete problem means it is:,Solvable in polynomial time,Verifiable in polynomial time but no known polynomial solver,Unsolvable,Solvable in O(n log n),Verifiable in polynomial time but no known polynomial solver
+In a stack implemented with a linked list\, push and pop are both:,O(n),O(1),O(log n),O(n log n),O(1)
+What does the following C snippet compute for an array `a` of size `n`? `for(int i=1;i<n;i++) a[i]+=a[i-1];`,Maximum element,Prefix sums,Bubble sort pass,Binary search,Prefix sums
+Which normal form eliminates all transitive dependencies?,1NF,2NF,3NF,BCNF,3NF
+OSI model layers from bottom to top (layer 1 to 7):,Physical\, Data Link\, Network\, Transport\, Session\, Presentation\, Application,Application\, Presentation\, Session\, Transport\, Network\, Data Link\, Physical,Physical\, Network\, Data Link\, Transport\, Session\, Presentation\, Application,Data Link\, Physical\, Network\, Session\, Transport\, Presentation\, Application,Physical\, Data Link\, Network\, Transport\, Session\, Presentation\, Application
+The recurrence $T(n) = 2T(n/2) + n\log n$ has solution (by Master Theorem or Akra-Bazzi):,$\Theta(n \log n)$,$\Theta(n \log^2 n)$,$\Theta(n^2)$,$\Theta(n \log n \log\log n)$,\Theta(n \log^2 n)
+What will `0.1 + 0.2 == 0.3` evaluate to in most programming languages?,True,False,Depends on OS,Undefined,False
+In a min-heap\, after removing the root\, the heap property is restored by:,Removing the last element,Moving the last element to root and sifting down,Moving the smallest child to root,Rebuilding the entire heap,Moving the last element to root and sifting down
+Which gate is logically equivalent to a NAND followed by NOT on both inputs and then NAND?,AND,OR,XOR,XNOR,AND
+The page replacement algorithm with lowest page-fault rate in the optimal (theoretical) case is:,FIFO,LRU,Optimal (Belady's),Clock,Optimal (Belady's)

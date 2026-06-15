@@ -1,701 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NET-4 CS Entry Test | NUST 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<!-- MathJax -->
-<script>
-  window.MathJax = {
-    tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$']] },
-    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
-  };
-</script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<style>
-:root{
-  --bg:#0d0f14;
-  --surface:#141720;
-  --surface2:#1c2030;
-  --border:#252a3a;
-  --accent:#e8322a;
-  --accent2:#f0643a;
-  --gold:#f5c842;
-  --green:#2ecc71;
-  --text:#e8eaf0;
-  --text2:#8892aa;
-  --text3:#555e75;
-  --math:#ccd6f6;
-  --mono:'IBM Plex Mono',monospace;
-  --sans:'IBM Plex Sans',sans-serif;
-  --radius:6px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBNET NET 4 - Advanced Simulator</title>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: { typeset: false }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-/* ── TOP BAR ── */
-#topbar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(13,15,20,.96);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;height:56px;
-}
-.topbar-left{display:flex;align-items:center;gap:16px}
-.logo{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
-.test-label{font-size:12px;color:var(--text3);font-weight:500;letter-spacing:.06em}
-.topbar-right{display:flex;align-items:center;gap:20px}
-#timer-wrap{display:flex;align-items:center;gap:8px}
-.timer-icon{width:16px;height:16px;fill:var(--accent)}
-#timer{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--gold);letter-spacing:.08em;min-width:68px;text-align:right}
-#timer.urgent{color:var(--accent);animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.btn{
-  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.06em;
-  text-transform:uppercase;padding:7px 18px;border-radius:var(--radius);
-  border:none;cursor:pointer;transition:all .2s
-}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text2)}
-.btn-ghost:hover{border-color:var(--text2);color:var(--text)}
-.btn-red{background:var(--accent);color:#fff}
-.btn-red:hover{background:#c8241d}
-.score-chip{
-  font-family:var(--mono);font-size:12px;color:var(--text2);
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:var(--radius);padding:5px 12px;
-}
-.score-chip span{color:var(--gold);font-weight:600}
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #151f32;
+            --border-color: #24344d;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.25);
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.15);
+            --error: #f43f5e;
+            --error-bg: rgba(244, 63, 94, 0.15);
+            --accent-yellow: #f59e0b;
+        }
 
-/* ── COVER ── */
-#cover{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;padding:80px 32px 40px;text-align:center;
-  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(232,50,42,.07) 0%,transparent 70%);
-}
-.cover-eyebrow{
-  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:24px;
-}
-.cover-title{
-  font-size:clamp(42px,6vw,76px);font-weight:700;line-height:1.04;
-  letter-spacing:-.02em;margin-bottom:8px;
-}
-.cover-title span{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent
-}
-.cover-sub{font-size:16px;color:var(--text2);font-weight:300;margin-bottom:48px;line-height:1.6}
-.cover-stats{
-  display:flex;gap:0;border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;margin-bottom:48px;
-}
-.cover-stat{padding:18px 32px;border-right:1px solid var(--border)}
-.cover-stat:last-child{border-right:none}
-.cs-val{font-size:28px;font-weight:700;font-family:var(--mono);color:var(--text)}
-.cs-val.red{color:var(--accent)}
-.cs-lab{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
-.warning-box{
-  background:rgba(232,50,42,.08);border:1px solid rgba(232,50,42,.25);
-  border-radius:var(--radius);padding:16px 28px;max-width:560px;
-  font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:40px;
-}
-.warning-box strong{color:var(--accent)}
-.btn-start{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#fff;font-size:14px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;padding:16px 56px;border-radius:var(--radius);
-  border:none;cursor:pointer;transition:all .25s;
-  box-shadow:0 0 40px rgba(232,50,42,.3)
-}
-.btn-start:hover{transform:translateY(-2px);box-shadow:0 4px 48px rgba(232,50,42,.4)}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-/* ── SUBJECT NAV ── */
-#subject-nav{
-  position:fixed;left:0;top:56px;bottom:0;width:220px;
-  background:var(--surface);border-right:1px solid var(--border);
-  padding:24px 0;overflow-y:auto;z-index:90;
-  display:none;
-}
-.snav-label{
-  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--text3);padding:0 20px 10px;
-}
-.snav-item{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 20px;cursor:pointer;transition:background .15s;
-  border-left:3px solid transparent;font-size:14px;color:var(--text2);
-}
-.snav-item:hover{background:var(--surface2);color:var(--text)}
-.snav-item.active{
-  border-left-color:var(--accent);color:var(--text);background:var(--surface2)
-}
-.snav-badge{
-  font-family:var(--mono);font-size:11px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:4px;padding:2px 7px;
-  min-width:32px;text-align:center;
-}
-.snav-badge.done{background:rgba(46,204,113,.1);border-color:rgba(46,204,113,.3);color:var(--green)}
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 25px;
+            margin-top: 20px;
+        }
 
-/* ── MAIN CONTENT ── */
-#main{
-  margin-left:0;padding-top:56px;min-height:100vh;
-  transition:margin-left .3s;
-}
-#main.with-nav{margin-left:220px}
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+        }
 
-/* ── SUBJECT HEADER ── */
-.subject-header{
-  padding:32px 48px 24px;
-  border-bottom:1px solid var(--border);
-  background:var(--surface);
-  position:sticky;top:56px;z-index:80;
-}
-.sh-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.sh-tag{
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-  background:rgba(232,50,42,.12);border:1px solid rgba(232,50,42,.2);
-  color:var(--accent);border-radius:4px;padding:3px 10px
-}
-.sh-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
-.sh-meta{font-size:13px;color:var(--text3)}
-.progress-bar{
-  height:3px;background:var(--border);border-radius:2px;margin-top:14px;overflow:hidden
-}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
 
-/* ── QUESTIONS ── */
-.questions-wrap{padding:32px 48px;max-width:900px}
-.q-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:28px;margin-bottom:20px;
-  transition:border-color .2s;
-}
-.q-card.answered{border-color:rgba(46,204,113,.2)}
-.q-card.active{border-color:rgba(232,50,42,.3);box-shadow:0 0 0 1px rgba(232,50,42,.1)}
-.q-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
-.q-num{
-  font-family:var(--mono);font-size:11px;color:var(--accent);
-  background:rgba(232,50,42,.1);border:1px solid rgba(232,50,42,.2);
-  border-radius:4px;padding:4px 10px;white-space:nowrap;flex-shrink:0;margin-top:1px
-}
-.q-text{font-size:15px;line-height:1.7;color:var(--text);font-weight:400}
-.q-text .mjx-chtml{color:var(--math)}
-.options-grid{display:flex;flex-direction:column;gap:10px}
-.opt-btn{
-  display:flex;align-items:flex-start;gap:14px;
-  padding:14px 18px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:var(--radius);
-  cursor:pointer;transition:all .18s;text-align:left;width:100%
-}
-.opt-btn:hover{border-color:var(--accent);background:rgba(232,50,42,.06)}
-.opt-btn.selected{
-  border-color:var(--accent);background:rgba(232,50,42,.12);
-}
-.opt-btn.correct{
-  border-color:var(--green);background:rgba(46,204,113,.1);
-  pointer-events:none;
-}
-.opt-btn.wrong{
-  border-color:var(--accent);background:rgba(232,50,42,.1);
-  pointer-events:none;
-}
-.opt-btn.revealed{pointer-events:none}
-.opt-key{
-  font-family:var(--mono);font-size:12px;font-weight:600;
-  width:22px;height:22px;border-radius:4px;display:flex;align-items:center;
-  justify-content:center;background:var(--border);color:var(--text3);
-  flex-shrink:0;margin-top:1px;
-}
-.opt-btn.selected .opt-key{background:var(--accent);color:#fff}
-.opt-btn.correct .opt-key{background:var(--green);color:#fff}
-.opt-btn.wrong .opt-key{background:var(--accent);color:#fff}
-.opt-text{font-size:14px;line-height:1.6;color:var(--text2)}
-.opt-btn.selected .opt-text{color:var(--text)}
+        h1 { margin: 0; font-size: 1.6rem; color: #fff; font-weight: 700; letter-spacing: -0.5px; }
+        
+        .timer-badge {
+            background: #1e293b;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--accent-yellow);
+        }
 
-/* ── RESULTS ── */
-#results{display:none;padding:40px 48px;max-width:860px;margin:0 auto}
-.result-hero{
-  text-align:center;padding:48px 32px;
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  margin-bottom:32px;
-}
-.result-score{font-size:72px;font-weight:700;font-family:var(--mono);line-height:1}
-.result-score.fail{color:var(--accent)}
-.result-score.pass{color:var(--gold)}
-.result-score.great{color:var(--green)}
-.result-label{font-size:14px;color:var(--text3);margin-top:8px;text-transform:uppercase;letter-spacing:.1em}
-.result-msg{font-size:16px;color:var(--text2);margin-top:20px;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto}
-.result-breakdown{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px
-}
-.rb-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center
-}
-.rb-sub{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px}
-.rb-score{font-family:var(--mono);font-size:24px;font-weight:700;color:var(--text)}
-.rb-total{font-size:11px;color:var(--text3)}
+        /* Left Side: Quiz Workspace */
+        .workspace {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
 
-/* Responsive */
-@media(max-width:768px){
-  #subject-nav{width:0;overflow:hidden}
-  #main.with-nav{margin-left:0}
-  .cover-stats{flex-wrap:wrap}
-  .questions-wrap{padding:16px 16px}
-  .subject-header{padding:16px 16px 12px}
-  .result-breakdown{grid-template-columns:repeat(2,1fr)}
-}
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-/* No-scroll on start */
-body.locked{overflow:hidden}
-</style>
+        .q-number { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); font-weight: 700; }
+        
+        .bookmark-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+        .bookmark-btn.active {
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .question-text { font-size: 1.25rem; line-height: 1.6; margin-bottom: 30px; color: #fff; }
+
+        .options-grid { display: flex; flex-direction: column; gap: 14px; }
+
+        .option-btn {
+            padding: 16px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #1e293b;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: #24344d;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        /* Dynamic Feedback Engine Color Specifications */
+        .option-btn.correct-state {
+            background-color: var(--success-bg) !important;
+            border-color: var(--success) !important;
+            color: #fff !important;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .option-btn.wrong-state {
+            background-color: var(--error-bg) !important;
+            border-color: var(--error) !important;
+            color: #fff !important;
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+        }
+
+        /* Controls Block */
+        .control-panel {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            background: #1e293b;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #24344d; border-color: var(--text-muted); }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        
+        .nav-btn.primary-action {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        .nav-btn.primary-action:hover { background: #2563eb; box-shadow: 0 0 15px var(--primary-glow); }
+
+        /* Right Side: Navigation Panel Dashboard */
+        .sidebar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-title { font-size: 1rem; font-weight: 600; margin: 0; color: #fff; }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .matrix-cell {
+            aspect-ratio: 1;
+            background: #1e293b;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .matrix-cell:hover { border-color: var(--primary); color: #fff; }
+        .matrix-cell.active { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); color: var(--primary); box-shadow: inset 0 0 4px var(--primary-glow); }
+        .matrix-cell.correct { background: var(--success-bg); border-color: var(--success); color: var(--success); }
+        .matrix-cell.wrong { background: var(--error-bg); border-color: var(--error); color: var(--error); }
+        .matrix-cell.bookmarked { border-color: var(--accent-yellow) !important; position: relative; }
+        .matrix-cell.bookmarked::after {
+            content: ''; position: absolute; top: 2px; right: 2px; 
+            width: 6px; height: 6px; background: var(--accent-yellow); border-radius: 50%;
+        }
+
+        .stats-summary {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        #error-overlay {
+            background: var(--error-bg);
+            border: 1px solid var(--error);
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            grid-column: 1 / -1;
+        }
+        
+        .results-view { text-align: center; padding: 40px 10px; }
+        .score-circle { width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--primary); display: flex; align-items: center; justify-content: center; margin: 20px auto; font-size: 2rem; font-weight: 800; color: #fff; background: rgba(59, 130, 246, 0.05); }
+    </style>
 </head>
-<body class="locked">
+<body>
 
-<!-- TOP BAR -->
-<div id="topbar">
-  <div class="topbar-left">
-    <span class="logo">NUST</span>
-    <span class="test-label">NET-4 / CS Entry Test &nbsp;|&nbsp; 16 Jun 2026 – Evening</span>
-  </div>
-  <div class="topbar-right">
-    <div class="score-chip">Answered: <span id="answered-count">0</span>/200</div>
-    <div id="timer-wrap">
-      <svg class="timer-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Z"/><path d="M12 6v6.41l3.29 3.3 1.42-1.42L14 11.59V6Z"/></svg>
-      <span id="timer">3:00:00</span>
+    <div class="container">
+        <div id="error-overlay"></div>
+
+        <header>
+            <h1>CBNET NET 4 Simulator</h1>
+            <div class="timer-badge" id="clock">00:00</div>
+        </header>
+
+        <main class="workspace" id="main-stage">
+            <div>
+                <div class="q-header">
+                    <span class="q-number" id="q-meta-index">Question 1</span>
+                    <button class="bookmark-btn" id="flag-btn" onclick="toggleBookmark()">Flag for Review</button>
+                </div>
+                <div class="question-text" id="q-body">Loading simulation data rows...</div>
+                <div class="options-grid" id="options-box"></div>
+            </div>
+
+            <div class="control-panel">
+                <button class="nav-btn" id="prev-btn" onclick="stepQuestion(-1)">&larr; Previous</button>
+                <button class="nav-btn primary-action" id="next-btn" onclick="stepQuestion(1)">Next &rarr;</button>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Question Navigation Matrix</h3>
+            <div class="matrix-grid" id="nav-matrix"></div>
+            
+            <div class="stats-summary">
+                <div>Score: <strong id="stat-score" style="color:var(--success);">0</strong></div>
+                <div>Progress: <strong id="stat-progress">0/0</strong></div>
+            </div>
+            <button class="nav-btn primary-action" style="width:100%; margin-top:10px;" onclick="terminateExam()">Submit Assessment</button>
+        </aside>
     </div>
-    <button class="btn btn-red" id="submit-btn" style="display:none" onclick="submitTest()">Submit Test</button>
-  </div>
-</div>
 
-<!-- COVER -->
-<div id="cover">
-  <div class="cover-eyebrow">National University of Sciences &amp; Technology</div>
-  <h1 class="cover-title">NET-4<br/><span>Entry Test</span></h1>
-  <p class="cover-sub">Computer Science — Evening Session &nbsp;·&nbsp; 16 June 2026<br/>Strictly Timed · Computer Based · Official Format</p>
-  <div class="cover-stats">
-    <div class="cover-stat"><div class="cs-val">200</div><div class="cs-lab">Questions</div></div>
-    <div class="cover-stat"><div class="cs-val">180</div><div class="cs-lab">Minutes</div></div>
-    <div class="cover-stat"><div class="cs-val red">NET-4</div><div class="cs-lab">Difficulty</div></div>
-    <div class="cover-stat"><div class="cs-val">4</div><div class="cs-lab">Subjects</div></div>
-  </div>
-  <div class="warning-box">
-    <strong>⚠ READ CAREFULLY:</strong> This is the <strong>most difficult</strong> variant of the NUST Entry Test.
-    Each section contains 50 MCQs. There is <strong>no negative marking</strong>. You have exactly
-    <strong>3 hours</strong>. The clock starts the moment you press Begin.
-    Good luck — you will need it.
-  </div>
-  <button class="btn-start" onclick="startTest()">Begin Test →</button>
-</div>
+    <script>
+        let dataset = [];
+        let currentIndex = 0;
+        let examTimer = null;
+        let timeElapsed = 0;
 
-<!-- SUBJECT NAV -->
-<nav id="subject-nav">
-  <div class="snav-label">Sections</div>
-  <div class="snav-item active" onclick="scrollToSection('math')" id="nav-math">
-    <span>Mathematics</span>
-    <span class="snav-badge" id="badge-math">0/50</span>
-  </div>
-  <div class="snav-item" onclick="scrollToSection('physics')" id="nav-physics">
-    <span>Physics</span>
-    <span class="snav-badge" id="badge-physics">0/50</span>
-  </div>
-  <div class="snav-item" onclick="scrollToSection('english')" id="nav-english">
-    <span>English</span>
-    <span class="snav-badge" id="badge-english">0/50</span>
-  </div>
-  <div class="snav-item" onclick="scrollToSection('computer')" id="nav-computer">
-    <span>Computer</span>
-    <span class="snav-badge" id="badge-computer">0/50</span>
-  </div>
-  <div style="margin-top:32px;padding:0 20px">
-    <button class="btn btn-red" style="width:100%;font-size:12px;padding:10px" onclick="submitTest()">Submit Test</button>
-  </div>
-</nav>
+        function parseCSVLine(line) {
+            const separatorToken = "___LIT_COMMA___";
+            const processedLine = line.replace(/\\,/g, separatorToken);
+            const arrayTokens = processedLine.split(',');
+            return arrayTokens.map(t => t.replace(new RegExp(separatorToken, 'g'), ',').trim());
+        }
 
-<!-- MAIN -->
-<div id="main">
-  <div id="test-content" style="display:none">
-    <!-- Sections injected by JS -->
-  </div>
-  <div id="results"></div>
-</div>
+        async function initializeQuizRuntime() {
+            try {
+                const response = await fetch('data.csv');
+                if (!response.ok) throw new Error("Could not find or locate standard 'data.csv' source.");
+                
+                const rawBuffer = await response.text();
+                const lines = rawBuffer.split('\n').filter(l => l.trim() !== '');
 
-<script>
-// ── RAW QUESTION DATA ──
-// Format per line: "question,A,B,C,D,answer"
-// Sections separated by plain section name lines
-const RAW = `MATH
-If $\\int_0^1 \\frac{\\ln(1+x)}{x}\\,dx = \\frac{\\pi^2}{12}$, then $\\int_0^1 \\frac{\\ln(1-x)}{x}\\,dx$ equals:,$-\\frac{\\pi^2}{6}$,$-\\frac{\\pi^2}{12}$,$\\frac{\\pi^2}{6}$,$-\\frac{\\pi^2}{3}$,$-\\frac{\\pi^2}{6}$
-The number of real solutions to $x^x = \\left(\\frac{x}{2}\\right)^{x/2}$ for $x>0$ is:,0,1,2,3,2
-If $z = \\cos\\theta + i\\sin\\theta$, then $\\frac{z^2-1}{z^2+1}$ simplifies to:,$i\\tan\\theta$,$i\\sin\\theta$,$i\\cot\\theta$,$\\tan\\theta$,$i\\tan\\theta$
-The sum of the series $\\sum_{n=1}^{\\infty}\\frac{n^2}{2^n}$ equals:,4,6,8,10,6
-If $f(x)=\\lim_{n\\to\\infty}\\frac{x^{2n}-1}{x^{2n}+1}$, then $f$ is:,Continuous everywhere,Discontinuous at $x=\\pm1$,Discontinuous at $x=0$,Continuous only for $|x|<1$,Discontinuous at $x=\\pm1$
-The number of 4-digit numbers with distinct digits whose digit sum is 27 is:,12,16,18,20,16
-Let $A$ be a $3\\times3$ matrix with $\\det(A)=5$. Then $\\det(2\\,\\text{adj}(A))$ equals:,200,400,1000,2000,400
-If $\\sin^{-1}x+\\sin^{-1}y+\\sin^{-1}z=\\pi$, then $x^2+y^2+z^2+2xyz$ equals:,0,1,2,$\\pi$,1
-The area enclosed by the curve $r=2\\cos\\theta-1$ in polar coordinates is:,$\\frac{\\pi}{4}$,$\\frac{\\pi}{2}$,$\\frac{3\\pi}{4}$,$\\pi$,$\\frac{\\pi}{2}$
-If $\\alpha$ and $\\beta$ are roots of $x^2-x+1=0$, then $\\alpha^{2026}+\\beta^{2026}$ equals:,$-1$,$0$,$1$,$2$,$-1$
-The minimum value of $|z-3-4i|+|z+2-i|$ over all complex $z$ is:,$5$,$\\sqrt{50}$,$\\sqrt{26}$,$\\sqrt{34}$,$\\sqrt{50}$
-A fair die is rolled until a 6 appears. The probability that an even number of rolls are needed is:,$\\frac{1}{6}$,$\\frac{5}{11}$,$\\frac{6}{11}$,$\\frac{5}{36}$,$\\frac{5}{11}$
-If $f(x)=x^3-3x$ and $g$ is its inverse function, then $g'(10)$ equals:,$\\frac{1}{9}$,$\\frac{1}{12}$,$\\frac{1}{24}$,$\\frac{1}{75}$,$\\frac{1}{75}$
-The number of ways to arrange 3 red, 3 blue, and 3 green balls in a row such that no two adjacent balls have the same color is:,0,12,18,36,12
-$\\lim_{x\\to0}\\frac{(1+x)^{1/x}-e}{x}$ equals:,$-\\frac{e}{2}$,$\\frac{e}{2}$,$-e$,$e$,$-\\frac{e}{2}$
-The number of integers between 1 and 1000 divisible by neither 4 nor 6 nor 10 is:,499,500,501,502,499
-If $I=\\int_0^{\\pi/2}\\frac{dx}{1+(\\tan x)^{\\sqrt{2}}}$, then $I$ equals:,$\\frac{\\pi}{8}$,$\\frac{\\pi}{4}$,$\\frac{\\pi}{2}$,$\\frac{\\pi}{6}$,$\\frac{\\pi}{4}$
-A parabola with vertex at origin opens rightward and passes through $(4,2)$. The directrix is $x=$:,$-1$,$-2$,$-3$,$-4$,$-1$
-How many ordered triples $(a,b,c)$ of positive integers satisfy $a+b+c=20$ and $a\\le b\\le c$?:,30,32,34,36,36
-The coefficient of $x^{10}$ in $(1+x+x^2)^{10}$ is:,3^{10},8451,8901,7869,8901
-If $\\log_a b=\\log_b c=\\log_c a=k$, then $k$ equals:,$1$,$-1$,$\\pm1$,$\\pm\\frac{1}{\\sqrt{3}}$,$\\pm1$
-The solution set of $\\lfloor x^2-x-2\\rfloor=0$ is:,$(1,2)$,$[1,2]$,$(1,2]$,$[1,2)$,$(1,2]$
-If the equation $x^4-4x^3+ax^2+bx+1=0$ has 4 positive roots, then $a+b$ equals:,2,$-2$,4,$-4$,$-2$
-$\\int\\frac{dx}{x^4+x^2+1}$ — which expression is a correct antiderivative form?,A sum of two arctangent expressions,$\\frac{1}{2}\\arctan(x-\\frac{1}{x})+C$,A pure logarithmic expression,$\\frac{1}{2}\\ln|x^2+1|+C$,A sum of two arctangent expressions
-The rank of $\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$ is:,1,2,3,0,2
-If $y=\\sqrt{x+\\sqrt{x+\\sqrt{x+\\cdots}}}$, then $\\frac{dy}{dx}$ equals:,$\\frac{1}{2y-1}$,$\\frac{1}{y}$,$\\frac{y}{2x}$,$2y-1$,$\\frac{1}{2y-1}$
-The length of the common external tangent to two circles of radius 5 centred at $(0,0)$ and $(6,8)$ is:,$8$,$6$,$\\sqrt{132}$,$12$,$\\sqrt{132}$
-The value of $\\tan\\!\\left(\\sum_{k=1}^{10}\\arctan\\frac{1}{k^2+k+1}\\right)$ equals:,$\\frac{10}{11}$,$\\frac{10}{12}$,$\\frac{11}{12}$,$\\frac{9}{10}$,$\\frac{10}{11}$
-A square matrix $A$ satisfies $A^2=A$. Then $\\det(A+I)$ can be:,0 or 1 only,0 only,any integer,0 or 2 or 4 or 8,0 or 2 or 4 or 8
-The number of distinct real roots of $x^4-4|x|-1=0$ is:,2,3,4,0,2
-PHYSICS
-A particle moves in the $xy$-plane: $x=A\\cos\\omega t$, $y=B\\sin\\omega t$. The magnitude of its acceleration is:,$\\omega^2\\sqrt{x^2+y^2}$,$\\omega\\sqrt{x^2+y^2}$,$\\omega^2\\sqrt{A^2+B^2}$,$\\omega(A+B)$,$\\omega^2\\sqrt{x^2+y^2}$
-A thin uniform disk of mass $M$ radius $R$ has a hole of radius $R/2$ centred at $(R/2,0)$. Moment of inertia about central axis:,$\\frac{11MR^2}{24}$,$\\frac{13MR^2}{24}$,$\\frac{7MR^2}{12}$,$\\frac{3MR^2}{8}$,$\\frac{13MR^2}{24}$
-A photon of wavelength $\\lambda$ scatters off a free electron at rest through $90°$ to its original direction. Scattered wavelength:,$\\lambda+\\frac{h}{m_e c}$,$\\lambda+\\frac{2h}{m_e c}$,$\\lambda\\sqrt{2}$,$\\lambda+\\frac{h}{m_e c\\sqrt{2}}$,$\\lambda+\\frac{h}{m_e c}$
-Two stars each of mass $M$ orbit their common centre at radius $R$. The orbital period is:,$2\\pi\\sqrt{\\frac{R^3}{GM}}$,$2\\pi\\sqrt{\\frac{2R^3}{GM}}$,$\\pi\\sqrt{\\frac{4R^3}{GM}}$,$2\\pi\\sqrt{\\frac{4R^3}{GM}}$,$2\\pi\\sqrt{\\frac{4R^3}{GM}}$
-A Carnot engine operates between $500\\,K$ and $300\\,K$ and produces $2\\,kJ$ per cycle. Heat rejected per cycle:,3 kJ,5 kJ,2 kJ,1.2 kJ,3 kJ
-A current-carrying square loop of side $a$ is in a uniform field $B$ with its plane parallel to $B$. Torque on loop (current $I$):,$BIa^2$,$\\frac{BIa^2}{2}$,$2BIa^2$,0,$BIa^2$
-An $LC$ circuit has $L=1\\,mH$, $C=1\\,\\mu F$. Initial charge $Q_0$. Maximum current:,$Q_0\\sqrt{\\frac{L}{C}}$,$Q_0\\sqrt{\\frac{C}{L}}$,$\\frac{Q_0}{\\sqrt{LC}}$,$Q_0\\sqrt{LC}$,$Q_0\\sqrt{\\frac{C}{L}}$
-A rod of length $L$ with charge density $\\lambda$ lies on the $x$-axis (0 to $L$). Electric potential at $(L,0)$:,$\\frac{\\lambda}{4\\pi\\varepsilon_0}\\ln2$,$\\frac{\\lambda L}{4\\pi\\varepsilon_0}$,$\\frac{\\lambda}{4\\pi\\varepsilon_0}$,$\\frac{2\\lambda}{4\\pi\\varepsilon_0}$,$\\frac{\\lambda}{4\\pi\\varepsilon_0}\\ln2$
-Two capacitors $C$ charged to $V$ in series then reconnected in parallel. Ratio of final to initial energy:,$\\frac{1}{2}$,$\\frac{1}{4}$,2,1,$\\frac{1}{2}$
-A standing wave is formed by $y_1=0.1\\sin(2\\pi t-2\\pi x)$ and $y_2=0.1\\sin(2\\pi t+2\\pi x)$. Distance between adjacent nodes:,$0.25\\,m$,$0.5\\,m$,$1\\,m$,$0.1\\,m$,$0.5\\,m$
-A charged particle in a magnetic field: speed doubled and charge halved. New radius of circular motion relative to old:,Same,Doubled,Quadrupled,Halved,Doubled
-Object placed at the centre of curvature of a concave mirror then moves toward the pole with speed $v$. The image:,Moves toward mirror at speed $v$,Moves away from mirror at speed $>v$,Moves toward mirror at speed $<v$,Stays fixed,Moves away from mirror at speed $>v$
-Gas undergoes adiabatic compression: initial-to-final volume ratio $8:1$, $\\gamma=5/3$. Final-to-initial temperature ratio:,$4:1$,$8:1$,$16:1$,$2:1$,$4:1$
-In Young's DSE: wavelength $\\lambda$, slit separation $d$, screen distance $D$. One slit covered with glass (thickness $t$, index $n$). Central fringe shift:,$\\frac{(n-1)tD}{d}$,$\\frac{ntD}{d}$,$\\frac{(n+1)tD}{d}$,$\\frac{(n-1)D}{td}$,$\\frac{(n-1)tD}{d}$
-Binding energy per nucleon is highest for:,$^{56}$Fe,$^{12}$C,$^{238}$U,$^{4}$He,$^{56}$Fe
-A ball is thrown horizontally; another dropped from same height simultaneously. Which hits first?,Thrown ball,Dropped ball,Both simultaneously,Depends on mass,Both simultaneously
-de Broglie wavelength of electron accelerated through $V$ volts:,$\\frac{1.23}{\\sqrt{V}}\\,nm$,$\\frac{12.3}{\\sqrt{V}}\\,\\AA$,$\\frac{1.23}{\\sqrt{V}}\\,\\AA$,$\\frac{0.123}{\\sqrt{V}}\\,nm$,$\\frac{1.23}{\\sqrt{V}}\\,nm$
-Dielectric slab inserted into capacitor connected to a battery. Which stays constant?,Charge,Voltage,Energy,Electric field,Voltage
-Series $RLC$ circuit at resonance: impedance equals:,$R$,$\\sqrt{R^2+(X_L-X_C)^2}$,0,$X_L+X_C$,$R$
-Rocket exhausts at $v_{ex}=2000\\,m/s$. To accelerate from $1000$ to $2000\\,m/s$: mass ratio $m_i/m_f$:,$e$,$e^{0.5}$,$e^{2}$,$e^{1.5}$,$e^{0.5}$
-Three identical resistors available. Maximum resistance is $3R$. The second highest resistance achievable is:,$\\frac{3R}{2}$,$\\frac{2R}{3}$,$\\frac{R}{3}$,$\\frac{4R}{3}$,$\\frac{3R}{2}$
-Work done by a non-conservative force equals:,Change in PE,Change in KE,Change in total mechanical energy,Zero,Change in total mechanical energy
-For glass-air total internal reflection with $n=1.5$, critical angle $\\theta_c$ is:,$\\sin^{-1}(0.67)$,$\\cos^{-1}(0.67)$,$\\tan^{-1}(1.5)$,$\\sin^{-1}(1.5)$,$\\sin^{-1}(0.67)$
-Uniform rod of length $L$ pivoted at one end, released from horizontal. Angular velocity when vertical:,$\\sqrt{\\frac{3g}{L}}$,$\\sqrt{\\frac{2g}{L}}$,$\\sqrt{\\frac{g}{L}}$,$\\sqrt{\\frac{6g}{L}}$,$\\sqrt{\\frac{3g}{L}}$
-Blackbody at $3000\\,K$ peaks at $\\lambda_m$. Cooled to $1500\\,K$: new peak wavelength:,$\\lambda_m/2$,$2\\lambda_m$,$4\\lambda_m$,$\\lambda_m$,$2\\lambda_m$
-Terminal velocity of a sphere of radius $r$ in viscous liquid is proportional to:,$r$,$r^2$,$r^3$,$\\sqrt{r}$,$r^2$
-Proton and $\\alpha$-particle accelerated through same potential. Ratio of de Broglie wavelengths $\\lambda_p/\\lambda_\\alpha$:,$\\frac{1}{\\sqrt{2}}$,$\\frac{1}{2}$,$\\sqrt{2}$,$2\\sqrt{2}$,$\\sqrt{2}$
-Electric field inside a uniformly charged spherical shell:,Zero,Uniform and outward,$\\frac{kQ}{r^2}$,Depends on position,Zero
-Two particles $m_1$, $m_2$ undergo perfectly inelastic collision. KE lost is:,$\\frac{m_1m_2}{2(m_1+m_2)}(v_1-v_2)^2$,$\\frac{1}{2}m_1v_1^2+\\frac{1}{2}m_2v_2^2$,$\\frac{1}{2}(m_1+m_2)v_f^2$,$m_1v_1-m_2v_2$,$\\frac{m_1m_2}{2(m_1+m_2)}(v_1-v_2)^2$
-Solenoid: length $\\ell$, radius $r$, $N$ turns, current $I$. Energy stored:,$\\frac{\\mu_0 N^2 I^2\\pi r^2}{2\\ell}$,$\\frac{\\mu_0 N^2 I^2}{2\\ell}$,$\\frac{\\mu_0 N^2 I^2 r^2}{2}$,$\\mu_0 N^2 I^2\\pi r^2\\ell$,$\\frac{\\mu_0 N^2 I^2\\pi r^2}{2\\ell}$
-Threshold frequency $f_0$. Light of $f>f_0$ shines: if intensity is doubled, the stopping potential:,Doubles,Halves,Stays the same,Increases slightly,Stays the same
-ENGLISH
-Choose the word that best completes the analogy: PALIMPSEST : MANUSCRIPT :: PENTIMENTO : ___,Sculpture,Painting,Symphony,Architecture,Painting
-"He was the last person I would have expected to arrive" — the embedded clause structure is:,A relative clause with ellipted complementizer,A gerund phrase,A reduced adverbial clause,An absolute construction,A relative clause with ellipted complementizer
-Choose the correctly punctuated sentence:,"The witness, who, the defense claimed, had lied, was recalled.","The witness who the defense claimed had lied was recalled.","The witness, who the defense claimed had lied, was recalled.","The witness who, the defense claimed, had lied was recalled.","The witness, who the defense claimed had lied, was recalled."
-Which sentence commits a squinting modifier error?,"Exercising regularly, according to studies, improves mood.","Students who practice daily often improve.","The patient was told frequently to monitor his BP.","Only those who finish first receive the prize.","The patient was told frequently to monitor his BP."
-PERSPICACIOUS is most nearly opposite in meaning to:,Discerning,Obtuse,Sagacious,Penetrating,Obtuse
-Which choice uses the subjunctive mood correctly?,"If I was you, I would reconsider.","She acts as if she was the queen.","The committee demands that he resigns.","It is essential that the report be submitted by Friday.","It is essential that the report be submitted by Friday."
-Identify the sentence with correct subject-verb agreement:,"Either the manager or her assistants is responsible.","Neither the students nor the teacher were prepared.","The number of errors in this document are alarming.","A pack of wolves was spotted near the village.","A pack of wolves was spotted near the village."
-Choose the antonym for SANGUINE:,Optimistic,Florid,Despondent,Ruddy,Despondent
-Which sentence does NOT contain a dangling modifier?,"Having eaten dinner, the dishes were washed.","Walking to school, it began to rain.","To excel in chess, one must practice endlessly.","Exhausted from the climb, a rest was needed.","To excel in chess, one must practice endlessly."
-The rhetorical device in "The pen is mightier than the sword" is:,Personification,Metonymy,Synecdoche,Litotes,Metonymy
-The word TENDENTIOUS most nearly means:,Objective,Promoting a particular cause,Uncertain,Temporary,Promoting a particular cause
-Which sentence uses the colon correctly?,"He had one goal: to win.","The menu included: pasta, salad, and bread.","She said: 'please be quiet'.","He was born in: Manchester.","He had one goal: to win."
-LACONIC is to BREVITY as LOQUACIOUS is to:,Silence,Verbosity,Clarity,Wit,Verbosity
-A passage argues technological determinism is flawed because it ignores human agency. This rhetorical strategy is:,Appeal to authority,Reductio ad absurdum,Counter-argument and refutation,Circular reasoning,Counter-argument and refutation
-Which word is an OXYMORON when used as a single compound?,Bittersweet,Daylight,Snowball,Rainstorm,Bittersweet
-Choose the sentence that is NOT ambiguous:,"Visiting relatives can be boring.","The professor told the student that he had failed.","The detective saw the thief with binoculars.","All students who missed the exam should report to the office.","All students who missed the exam should report to the office."
-ADUMBRATE most nearly means:,To clarify in detail,To sketch or outline vaguely,To celebrate loudly,To eliminate entirely,To sketch or outline vaguely
-Which is the correct conditional form?,"If he would have studied, he would have passed.","Had he studied, he would have passed.","Had he studied, he would have been passed.","If he studied, he would have passed.","Had he studied, he would have passed."
-"The streets swallowed the lonely wanderer" — this figure of speech is:,Metaphor,Simile,Personification,Pathetic fallacy,Personification
-PERIPATETIC most nearly means:,Sedentary,Nomadic,Itinerant,Domiciled,Itinerant
-Which sentence is in the passive voice WITH the agent expressed?,The novel was written.,The cake was eaten by the children.,They were seen leaving the building.,The window was broken.,The cake was eaten by the children.
-The word DEFENESTRATE literally means:,To overthrow a government,To throw someone out of a window,To remove furniture,To deny an allegation,To throw someone out of a window
-Which word CANNOT be used as both noun and verb?,Sanction,Advocate,Refuse,Ubiquitous,Ubiquitous
-Which of the following is an example of ANAPHORA?,"Do I dare disturb the universe?","Ask not what your country can do for you; ask what you can do for your country.","We shall fight on the beaches, we shall fight on the landing grounds, we shall fight in the fields.","It was the best of times, it was the worst of times.","We shall fight on the beaches, we shall fight on the landing grounds, we shall fight in the fields."
-"It is time the government took action" — the verb 'took' here uses:,Simple past,Present continuous,Past subjunctive,Future perfect,Past subjunctive
-In indirect speech: She said 'I have never been here before' becomes:,"She said she had never been there before.","She said she has never been here before.","She said she never was there before.","She said she never has been there before.","She said she had never been there before."
-ENERVATE most nearly means:,To energize,To weaken,To enumerate,To disturb,To weaken
-Which literary term describes a narrative beginning in the middle of the action?,In medias res,Denouement,Anachronism,Prolepsis,In medias res
-The error in "Between you and I, this is incorrect" is:,Wrong preposition,Wrong case: 'I' should be 'me' after preposition,Comma splice,Misplaced modifier,Wrong case: 'I' should be 'me' after preposition
-NEFARIOUS is most nearly opposite to:,Wicked,Virtuous,Criminal,Infamous,Virtuous
-AMELIORATE most nearly means:,To worsen,To improve,To evaluate,To eliminate,To improve
-COMPUTER
-In an AVL tree with root 20 (left child 10, right child 25), node 30 is inserted. What rotation(s) are needed?,No rotation,Left rotation at 25,Right-Left rotation at 20,Left rotation at 20,Left rotation at 20
-What does this output? int x=5; cout << x++ + ++x;,12,11,13,10,12
-Time complexity of Dijkstra's with a binary heap ($V$ vertices, $E$ edges):,$O(V\\log V)$,$O(E\\log V)$,$O((E+V)\\log V)$,$O(V^2)$,$O((E+V)\\log V)$
-A process in 'Waiting' state. It can transition to:,'Ready','Running','Terminated','New','Ready'
-A lossless-join dependency-preserving decomposition into 3NF is guaranteed by which method?,Project onto individual attributes,BCNF decomposition,Synthesis algorithm,First Normal Form only,Synthesis algorithm
-Two's complement of $-37$ in 8-bit binary:,11011011,11011010,11011100,10100101,11011011
-Which TCP/IP layer handles end-to-end error recovery and flow control?,Network,Transport,Data Link,Application,Transport
-Time complexity of KMP string matching (pattern $P$ in text $T$):,$O(|T||P|)$,$O(|T|+|P|)$,$O(|T|\\log|P|)$,$O(|P|^2)$,$O(|T|+|P|)$
-What does SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHERE country='PK') return?,All orders,Orders from Pakistani customers,Customer names,All customers,Orders from Pakistani customers
-Which data structure does BFS traversal of a graph use?,Stack,Queue,Priority Queue,Deque,Queue
-Evaluate: (0b1010 & 0b1100) | (0b0110 ^ 0b1010),14,12,10,8,14
-Which scheduling algorithm minimises average waiting time when all jobs arrive simultaneously?,FCFS,Round Robin,SJF,Priority Scheduling,SJF
-In a B-tree of order $m$, the maximum number of keys in a node is:,$m$,$m-1$,$m+1$,$2m-1$,$m-1$
-int a[]={1,2,3,4,5}; int *p=a+2; printf("%d",*(p-1)); Output:,1,2,3,4,2
-Which property is NOT required for a relational database primary key?,Uniqueness,Non-null,Must be indexed,Can be composite,Must be indexed
-ACID in database transactions stands for:,Atomicity-Consistency-Isolation-Durability,Availability-Consistency-Integrity-Data,Atomicity-Concurrency-Integrity-Durability,Accuracy-Consistency-Isolation-Data,Atomicity-Consistency-Isolation-Durability
-In Python: [x**2 for x in range(5) if x%2==0] produces:,"[0, 4, 16]","[0, 1, 4, 9, 16]","[4, 16]","[0, 4]","[0, 4, 16]"
-print(type(1/2)) in Python 3 outputs:,<class 'int'>,<class 'float'>,<class 'double'>,<class 'number'>,<class 'float'>
-Which is TRUE about a hash table with chaining?,Worst-case lookup is O(1),Worst-case lookup is O(n),Average-case lookup is O(n),It cannot handle collisions,Worst-case lookup is O(n)
-Maximum nodes in a binary tree of height $h$ (root at 0):,$2h$,$2^h-1$,$2^{h+1}-1$,$h^2$,$2^{h+1}-1$
-Default subnet mask for a Class B IPv4 network:,255.0.0.0,255.255.0.0,255.255.255.0,255.255.255.255,255.255.0.0
-NP-complete means:,Solvable in polynomial time,Verifiable in polynomial time with no known poly-time solver,Unsolvable,Solvable in O(n log n),Verifiable in polynomial time with no known poly-time solver
-Stack implemented with linked list: push and pop complexity:,$O(n)$,$O(1)$,$O(\\log n)$,$O(n\\log n)$,$O(1)$
-for(int i=1;i<n;i++) a[i]+=a[i-1]; — this computes:,Maximum element,Prefix sums,Bubble sort pass,Binary search,Prefix sums
-Which normal form eliminates all transitive dependencies?,1NF,2NF,3NF,BCNF,3NF
-OSI layers bottom-to-top (Layer 1→7):,"Physical, Data Link, Network, Transport, Session, Presentation, Application","Application, Presentation, Session, Transport, Network, Data Link, Physical","Physical, Network, Data Link, Transport, Session, Presentation, Application","Data Link, Physical, Network, Session, Transport, Presentation, Application","Physical, Data Link, Network, Transport, Session, Presentation, Application"
-Recurrence $T(n)=2T(n/2)+n\\log n$ — solution by Akra-Bazzi/Master Theorem:,$\\Theta(n\\log n)$,$\\Theta(n\\log^2 n)$,$\\Theta(n^2)$,$\\Theta(n\\log n\\log\\log n)$,$\\Theta(n\\log^2 n)$
-0.1 + 0.2 == 0.3 in most programming languages evaluates to:,True,False,OS-dependent,Undefined,False
-In a min-heap, after removing root, heap property is restored by:,Removing last element,Moving last element to root and sifting down,Moving smallest child to root,Rebuilding entire heap,Moving last element to root and sifting down
-Which gate is equivalent to two NAND gates wired to create AND?,AND,OR,XOR,XNOR,AND
-Optimal (Belady's) page replacement algorithm minimises:,Number of pages,Page size,Page faults,Seek time,Page faults`;
+                dataset = lines.map(line => {
+                    const cleanTokens = parseCSVLine(line);
+                    return {
+                        question: cleanTokens[0],
+                        options: [cleanTokens[1], cleanTokens[2], cleanTokens[3], cleanTokens[4]],
+                        answer: cleanTokens[5],
+                        selectedAnswer: null,
+                        isCorrect: null,
+                        bookmarked: false
+                    };
+                }).filter(entry => entry.question && entry.answer);
 
-// ── PARSE ──
-function parseQuestions(raw) {
-  const lines = raw.trim().split('\n');
-  const sections = [];
-  let current = null;
-  for (const line of lines) {
-    const t = line.trim();
-    if (!t) continue;
-    if (['MATH','PHYSICS','ENGLISH','COMPUTER'].includes(t)) {
-      current = { name: t, questions: [] };
-      sections.push(current);
-      continue;
-    }
-    if (!current) continue;
-    // Parse CSV respecting commas inside $...$
-    const cols = splitCSV(t);
-    if (cols.length < 6) continue;
-    const q = cols[0];
-    const opts = cols.slice(1, 5);
-    const ans = cols[5];
-    current.questions.push({ q, opts, ans });
-  }
-  return sections;
-}
+                if (dataset.length === 0) throw new Error("Parsed data array contains zero operational objects.");
 
-function splitCSV(line) {
-  const result = [];
-  let cur = '';
-  let depth = 0; // track $...$ nesting
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i];
-    if (c === '$') depth = depth ? 0 : 1;
-    if (c === ',' && depth === 0) {
-      result.push(cur.trim());
-      cur = '';
-    } else {
-      cur += c;
-    }
-  }
-  result.push(cur.trim());
-  return result;
-}
+                buildNavigationMatrix();
+                renderQuestionWorkspace();
+                startClock();
+                
+            } catch(ex) {
+                const overlay = document.getElementById('error-overlay');
+                overlay.style.display = "block";
+                overlay.innerText = `Runtime Error Sequence: ${ex.message}`;
+                document.getElementById('q-body').innerText = "Aborted processing structure loop.";
+            }
+        }
 
-// ── STATE ──
-const sections = parseQuestions(RAW);
-const userAnswers = {}; // "section-qIdx" -> optIdx
-let timerInterval = null;
-let secondsLeft = 180 * 60;
-let testStarted = false;
-let testSubmitted = false;
-const OPTION_KEYS = ['A','B','C','D'];
+        function startClock() {
+            examTimer = setInterval(() => {
+                timeElapsed++;
+                const mins = String(Math.floor(timeElapsed / 60)).padStart(2, '0');
+                const secs = String(timeElapsed % 60).padStart(2, '0');
+                document.getElementById('clock').innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
 
-function startTest() {
-  document.getElementById('cover').style.display = 'none';
-  document.getElementById('subject-nav').style.display = 'block';
-  document.getElementById('main').classList.add('with-nav');
-  document.getElementById('test-content').style.display = 'block';
-  document.getElementById('submit-btn').style.display = '';
-  document.body.classList.remove('locked');
-  renderSections();
-  startTimer();
-  testStarted = true;
-  // Typeset math
-  setTimeout(() => { if(window.MathJax) MathJax.typesetPromise(); }, 200);
-}
+        function buildNavigationMatrix() {
+            const matrix = document.getElementById('nav-matrix');
+            matrix.innerHTML = '';
+            dataset.forEach((_, idx) => {
+                const cell = document.createElement('div');
+                cell.className = 'matrix-cell';
+                cell.id = `cell-${idx}`;
+                cell.innerText = idx + 1;
+                cell.onclick = () => jumpToQuestion(idx);
+                matrix.appendChild(cell);
+            });
+            updateStatsPanel();
+        }
 
-function renderSections() {
-  const wrap = document.getElementById('test-content');
-  wrap.innerHTML = '';
-  let globalQ = 0;
-  sections.forEach((sec, si) => {
-    const secEl = document.createElement('div');
-    secEl.id = `section-${sec.name.toLowerCase()}`;
-    // header
-    secEl.innerHTML = `
-      <div class="subject-header">
-        <div class="sh-row">
-          <span class="sh-tag">${sec.name}</span>
-          <h2 class="sh-title">${secName(sec.name)}</h2>
-        </div>
-        <div class="sh-meta">${sec.questions.length} questions · 1 mark each</div>
-        <div class="progress-bar"><div class="progress-fill" id="prog-${sec.name.toLowerCase()}" style="width:0%"></div></div>
-      </div>
-      <div class="questions-wrap" id="qwrap-${sec.name.toLowerCase()}"></div>
-    `;
-    wrap.appendChild(secEl);
-    const qwrap = secEl.querySelector(`#qwrap-${sec.name.toLowerCase()}`);
-    sec.questions.forEach((q, qi) => {
-      globalQ++;
-      qwrap.appendChild(buildQCard(sec.name, qi, globalQ, q));
-    });
-  });
-}
+        function renderQuestionWorkspace() {
+            if(currentIndex >= dataset.length || currentIndex < 0) return;
+            
+            const item = dataset[currentIndex];
+            
+            // Sync Control Mechanics
+            document.getElementById('prev-btn').disabled = (currentIndex === 0);
+            document.getElementById('next-btn').innerText = (currentIndex === dataset.length - 1) ? "Finish" : "Next \u2192";
+            document.getElementById('q-meta-index').innerText = `Question ${currentIndex + 1}`;
+            
+            // Flag/Bookmark state representation
+            const flagBtn = document.getElementById('flag-btn');
+            if(item.bookmarked) flagBtn.classList.add('active');
+            else flagBtn.classList.remove('active');
 
-function secName(n) {
-  return {MATH:'Mathematics',PHYSICS:'Physics',ENGLISH:'English',COMPUTER:'Computer Science'}[n] || n;
-}
+            // Render Core Target Components
+            document.getElementById('q-body').innerText = item.question;
+            const container = document.getElementById('options-box');
+            container.innerHTML = '';
 
-function buildQCard(secName, qi, globalQ, q) {
-  const card = document.createElement('div');
-  card.className = 'q-card';
-  card.id = `q-${secName}-${qi}`;
-  const optsHtml = q.opts.map((o, oi) => `
-    <button class="opt-btn" id="opt-${secName}-${qi}-${oi}" onclick="selectAnswer('${secName}',${qi},${oi})">
-      <span class="opt-key">${OPTION_KEYS[oi]}</span>
-      <span class="opt-text">${o}</span>
-    </button>
-  `).join('');
-  card.innerHTML = `
-    <div class="q-header">
-      <span class="q-num">Q${globalQ}</span>
-      <span class="q-text">${q.q}</span>
-    </div>
-    <div class="options-grid">${optsHtml}</div>
-  `;
-  return card;
-}
+            item.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                
+                // CRITICAL STRUCTURAL FIX: Preserve raw answer text separate from DOM text mutated by MathJax
+                btn.setAttribute('data-raw', opt);
 
-function selectAnswer(sec, qi, oi) {
-  if (testSubmitted) return;
-  const key = `${sec}-${qi}`;
-  const prev = userAnswers[key];
-  if (prev !== undefined) {
-    document.getElementById(`opt-${sec}-${qi}-${prev}`).classList.remove('selected');
-  }
-  userAnswers[key] = oi;
-  document.getElementById(`opt-${sec}-${qi}-${oi}`).classList.add('selected');
-  document.getElementById(`q-${sec}-${qi}`).classList.add('answered');
-  updateBadges();
-}
+                if(item.selectedAnswer !== null) {
+                    btn.disabled = true;
+                    // Calculate visual highlights based on immutable raw state
+                    if(opt === item.answer) btn.classList.add('correct-state');
+                    if(opt === item.selectedAnswer && item.selectedAnswer !== item.answer) btn.classList.add('wrong-state');
+                } else {
+                    btn.onclick = () => selectOptionAction(btn, opt);
+                }
+                container.appendChild(btn);
+            });
 
-function updateBadges() {
-  let total = 0;
-  sections.forEach(sec => {
-    const s = sec.name.toLowerCase();
-    let cnt = 0;
-    sec.questions.forEach((_, qi) => {
-      if (userAnswers[`${sec.name}-${qi}`] !== undefined) cnt++;
-    });
-    const badge = document.getElementById(`badge-${s}`);
-    badge.textContent = `${cnt}/${sec.questions.length}`;
-    if (cnt === sec.questions.length) badge.classList.add('done');
-    else badge.classList.remove('done');
-    const prog = document.getElementById(`prog-${s}`);
-    if (prog) prog.style.width = `${cnt/sec.questions.length*100}%`;
-    total += cnt;
-  });
-  document.getElementById('answered-count').textContent = total;
-}
+            // Re-render highlight references across Navigation Matrix
+            document.querySelectorAll('.matrix-cell').forEach((c, i) => {
+                c.classList.remove('active');
+                if(i === currentIndex) c.classList.add('active');
+            });
 
-function scrollToSection(name) {
-  const el = document.getElementById(`section-${name}`);
-  if (el) el.scrollIntoView({behavior:'smooth'});
-  document.querySelectorAll('.snav-item').forEach(i => i.classList.remove('active'));
-  document.getElementById(`nav-${name}`)?.classList.add('active');
-}
+            // Trigger safe MathJax typesetting asynchronously on modifications
+            if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+                MathJax.typesetPromise([document.getElementById('main-stage')]);
+            }
+        }
 
-// ── TIMER ──
-function startTimer() {
-  timerInterval = setInterval(() => {
-    secondsLeft--;
-    const h = Math.floor(secondsLeft/3600);
-    const m = Math.floor((secondsLeft%3600)/60);
-    const s = secondsLeft%60;
-    document.getElementById('timer').textContent =
-      `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    if (secondsLeft <= 600) document.getElementById('timer').classList.add('urgent');
-    if (secondsLeft <= 0) { clearInterval(timerInterval); submitTest(); }
-  }, 1000);
-}
+        function selectOptionAction(element, choice) {
+            const item = dataset[currentIndex];
+            item.selectedAnswer = choice;
+            item.isCorrect = (choice === item.answer);
 
-// ── SUBMIT ──
-function submitTest() {
-  if (testSubmitted) return;
-  testSubmitted = true;
-  clearInterval(timerInterval);
-  // Reveal answers
-  sections.forEach(sec => {
-    sec.questions.forEach((q, qi) => {
-      const correct = q.opts.indexOf(q.ans);
-      const sel = userAnswers[`${sec.name}-${qi}`];
-      // Mark all options
-      q.opts.forEach((_, oi) => {
-        const btn = document.getElementById(`opt-${sec.name}-${qi}-${oi}`);
-        if (!btn) return;
-        btn.classList.add('revealed');
-        if (oi === correct) btn.classList.add('correct');
-        else if (sel === oi && oi !== correct) btn.classList.add('wrong');
-      });
-    });
-  });
-  showResults();
-}
+            const allButtons = document.querySelectorAll('.option-btn');
+            allButtons.forEach(b => {
+                b.disabled = true;
+                const rawVal = b.getAttribute('data-raw');
+                if(rawVal === item.answer) b.classList.add('correct-state');
+                if(rawVal === choice && choice !== item.answer) b.classList.add('wrong-state');
+            });
 
-function showResults() {
-  const breakdown = {};
-  let totalCorrect = 0;
-  let totalAttempted = 0;
-  sections.forEach(sec => {
-    let correct = 0, attempted = 0;
-    sec.questions.forEach((q, qi) => {
-      const sel = userAnswers[`${sec.name}-${qi}`];
-      if (sel !== undefined) {
-        attempted++;
-        if (q.opts[sel] === q.ans) correct++;
-      }
-    });
-    breakdown[sec.name] = {correct, attempted, total:sec.questions.length};
-    totalCorrect += correct;
-    totalAttempted += attempted;
-  });
-  const pct = Math.round(totalCorrect/200*100);
-  let scoreClass = 'fail', msg = '';
-  if (pct >= 80) { scoreClass = 'great'; msg = 'Outstanding performance. You've conquered NET-4.'; }
-  else if (pct >= 60) { scoreClass = 'pass'; msg = 'A solid result. Many seats at NUST are within reach.'; }
-  else if (pct >= 40) { scoreClass = 'fail'; msg = 'You're in the danger zone. Revisit your weak sections carefully.'; }
-  else { scoreClass = 'fail'; msg = 'Brutal. But this is NET-4 — regroup, revise, and return.'; }
-  const resDiv = document.getElementById('results');
-  resDiv.style.display = 'block';
-  resDiv.innerHTML = `
-    <div class="result-hero">
-      <div class="result-score ${scoreClass}">${totalCorrect}/200</div>
-      <div class="result-label">Final Score · ${pct}%</div>
-      <p class="result-msg">${msg}<br/><small style="color:var(--text3)">Attempted: ${totalAttempted}/200</small></p>
-    </div>
-    <div class="result-breakdown">
-      ${sections.map(s=>`
-        <div class="rb-card">
-          <div class="rb-sub">${s.name}</div>
-          <div class="rb-score">${breakdown[s.name].correct}</div>
-          <div class="rb-total">/ ${breakdown[s.name].total} correct</div>
-        </div>
-      `).join('')}
-    </div>
-    <p style="text-align:center;color:var(--text3);font-size:13px;margin-bottom:40px">
-      Correct answers highlighted in green above. Scroll up to review each section.
-    </p>
-  `;
-  resDiv.scrollIntoView({behavior:'smooth'});
-  // Re-typeset if needed
-  if(window.MathJax) MathJax.typesetPromise([resDiv]);
-}
-</script>
+            // Update Matrix Styles Syncing UI States
+            const matrixCell = document.getElementById(`cell-${currentIndex}`);
+            matrixCell.classList.add(item.isCorrect ? 'correct' : 'wrong');
+
+            updateStatsPanel();
+            
+            if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+                MathJax.typesetPromise(Array.from(allButtons));
+            }
+        }
+
+        function toggleBookmark() {
+            const item = dataset[currentIndex];
+            item.bookmarked = !item.bookmarked;
+            
+            const flagBtn = document.getElementById('flag-btn');
+            const cell = document.getElementById(`cell-${currentIndex}`);
+            
+            if(item.bookmarked) {
+                flagBtn.classList.add('active');
+                cell.classList.add('bookmarked');
+            } else {
+                flagBtn.classList.remove('active');
+                cell.classList.remove('bookmarked');
+            }
+        }
+
+        function stepQuestion(direction) {
+            if(direction === 1 && currentIndex === dataset.length - 1) {
+                terminateExam();
+                return;
+            }
+            currentIndex += direction;
+            renderQuestionWorkspace();
+        }
+
+        function jumpToQuestion(index) {
+            currentIndex = index;
+            renderQuestionWorkspace();
+        }
+
+        function updateStatsPanel() {
+            const correctCount = dataset.filter(q => q.isCorrect === true).length;
+            const attemptedCount = dataset.filter(q => q.selectedAnswer !== null).length;
+            
+            document.getElementById('stat-score').innerText = correctCount;
+            document.getElementById('stat-progress').innerText = `${attemptedCount}/${dataset.length}`;
+        }
+
+        function terminateExam() {
+            clearInterval(examTimer);
+            const score = dataset.filter(q => q.isCorrect === true).length;
+            const percentage = Math.round((score / dataset.length) * 100);
+            
+            const mainStage = document.getElementById('main-stage');
+            mainStage.innerHTML = `
+                <div class="results-view">
+                    <h2>Assessment Finalized</h2>
+                    <div class="score-circle">${percentage}%</div>
+                    <p style="color: var(--text-muted);">You resolved <strong>${score}</strong> correctly out of <strong>${dataset.length}</strong> total operational constraints.</p>
+                    <button class="nav-btn primary-action" style="margin-top:20px;" onclick="window.location.reload()">Restart Engine Run</button>
+                </div>
+            `;
+        }
+
+        window.onload = initializeQuizRuntime;
+    </script>
 </body>
 </html>
